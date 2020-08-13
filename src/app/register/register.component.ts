@@ -28,8 +28,11 @@ export class RegisterComponent implements OnInit {
     this.registerform.reset();
     this.authservice.RegisterUser(email,pword)
     .then((a) => {
-      this.router.navigate(['login']);
-    })
+      this.authservice.SignIn(email,pword)
+      .then((a) => {
+        this.router.navigate(['/storename']);
+      });
+    });
   }
 
 }
