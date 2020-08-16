@@ -1,27 +1,29 @@
+import { Router } from '@angular/router';
+import { AuthenticationService } from './../services/authservice.service';
 import { Observable, from } from 'rxjs';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
-
 @Component({
   selector: 'app-viewhistory',
   templateUrl: './viewhistory.component.html',
-  styleUrls: ['./viewhistory.component.scss']
+  styleUrls: ['./viewhistory.component.scss'],
 })
 export class ViewhistoryComponent implements OnInit {
-
   itemsRef: AngularFireList<any>;
   data1: Observable<any>;
   data: string = '';
 
-  constructor( private auth: AngularFireAuth, private db: AngularFireDatabase) {
+  constructor(private auth: AngularFireAuth, private db: AngularFireDatabase, private router: Router, private authservice: AuthenticationService) {
     this.auth.authState.subscribe((user) => {
-      if (user){
-        this.db.database.ref('users/' + user.uid + '/Store/Storename').once("value", (snapshot) => {
-          let d = snapshot.val();
-          this.data = d;
-        });
+      if (user) {
+        this.db.database
+          .ref('users/' + user.uid + '/Store/Storename')
+          .once('value', (snapshot) => {
+            let d = snapshot.val();
+            this.data = d;
+          });
 
         this.itemsRef = this.db.list('users/' + user.uid + '/History');
         this.data1 = this.itemsRef
@@ -32,10 +34,14 @@ export class ViewhistoryComponent implements OnInit {
             )
           );
       }
-    })
+    });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
+  logout() {
+    this.authservice.SignOut().then((a) => {
+      this.router.navigate(['/login']);
+    });
+  }
 }

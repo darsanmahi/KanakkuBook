@@ -21,6 +21,7 @@
             <a mat-list-item [routerLink]="['/storename']">Change Store Name</a>
             <a mat-list-item [routerLink]="['/viewhistory']">View History</a>
             <a mat-list-item [routerLink]="['/clearhistory']">Clear Account</a>
+            <button mat-raised-button color="primary" (click)="logout()">Log Out</button>
         </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>

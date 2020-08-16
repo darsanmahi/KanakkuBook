@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthenticationService } from './../services/authservice.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
@@ -5,7 +7,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-clearhistory',
@@ -21,7 +22,9 @@ export class ClearhistoryComponent implements OnInit {
     private formbuilder: FormBuilder,
     private auth: AngularFireAuth,
     private db: AngularFireDatabase,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private authservice: AuthenticationService,
+    private router: Router
   ) {
     this.clearform = this.formbuilder.group({
       name: ['', Validators.required],
@@ -78,6 +81,13 @@ export class ClearhistoryComponent implements OnInit {
             });
           });
       }
+    });
+  }
+
+  logout() {
+    this.authservice.SignOut()
+    .then((a)=>{
+      this.router.navigate(['/login']);
     });
   }
 }

@@ -1,9 +1,9 @@
+import { AuthenticationService } from './../services/authservice.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-
 
 @Component({
   selector: 'app-storename',
@@ -17,7 +17,8 @@ export class StorenameComponent implements OnInit {
     private formbuilder: FormBuilder,
     private db: AngularFireDatabase,
     private auth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private authservice: AuthenticationService
   ) {
     this.storenameform = this.formbuilder.group({
       name: ['', Validators.required],
@@ -33,7 +34,7 @@ export class StorenameComponent implements OnInit {
       if (user) {
         const uid = user.uid;
         this.db.database
-          .ref('users/' + uid +'/Store')
+          .ref('users/' + uid + '/Store')
           .set({
             StoreName: sname,
           })
@@ -41,6 +42,12 @@ export class StorenameComponent implements OnInit {
             this.router.navigate(['/displaystore']);
           });
       }
+    });
+  }
+
+  logout() {
+    this.authservice.SignOut().then((a) => {
+      this.router.navigate(['/login']);
     });
   }
 }
