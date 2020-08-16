@@ -4,14 +4,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Front End
 
-Bootstrap: 4.5
-Angular CLI: 9.1.7
-BackEnd: Firebase
+Bootstrap: 4.5,
+Angular CLI: 9.1.7,
+BackEnd: Firebase,
 
 ## Initial setup
 
-git clone `https://priyadarsan@bitbucket.org/priyadarsan/kanakkubook.git`
-go to the project directory in terminal
+git clone `https://priyadarsan@bitbucket.org/priyadarsan/kanakkubook.git`.
+Go to the project directory in terminal.
 Run `npm install` to setup the project
 
 ## Development server
