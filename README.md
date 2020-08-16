@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Bootstrap: 4.5,
 Angular CLI: 9.1.7,
-BackEnd: Firebase,
+BackEnd: Firebase
 
 ## Initial setup
 
