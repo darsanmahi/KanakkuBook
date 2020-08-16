@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "kanakkubook-ba48d": {
+      "hosting": {
+        "KanakkuBook": [
+          "kanakkubook-ba48d"
+        ]
+      }
+    }
+  }
+}
