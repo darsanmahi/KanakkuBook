@@ -1,3 +1,5 @@
+import { ClearhistoryComponent } from './clearhistory/clearhistory.component';
+import { ViewhistoryComponent } from './viewhistory/viewhistory.component';
 import { StorenameComponent } from './storename/storename.component';
 import { DisplaystoreComponent } from './displaystore/displaystore.component';
 import { RegisterComponent } from './register/register.component';
@@ -10,6 +12,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'displaystore', component: DisplaystoreComponent},
   { path: 'storename', component: StorenameComponent },
+  { path: 'viewhistory', component: ViewhistoryComponent },
+  { path: 'clearhistory', component: ClearhistoryComponent},
   { path: '', pathMatch: 'full', redirectTo: 'login' },
 ];
 

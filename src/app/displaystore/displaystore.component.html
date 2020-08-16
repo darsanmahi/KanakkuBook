@@ -9,18 +9,107 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 
-<body>
-    <header class="jumbotron text-center">
-        <div *ngFor="let item of data1 | async">
-            <h1>{{item}}</h1>
-        </div>
-    </header>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
-    </script>
-</body>
+<mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="sidenav.toggle()">
+     <mat-icon>menu</mat-icon>
+   </button>
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav class="example-sidenav" mode="side" closed>
+        <mat-list>
+            <a mat-list-item [routerLink]="['/displaystore']">Add Entry</a>
+            <a mat-list-item [routerLink]="['/storename']">Change Store Name</a>
+            <a mat-list-item [routerLink]="['/viewhistory']">View History</a>
+            <a mat-list-item [routerLink]="['/clearhistory']">Clear Account</a>
+        </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+
+        <body class="mat-app-background">
+            <div class="bg">
+                <header color="primary" class="mat-elevation-z24 text-center">
+                    <div *ngIf="data" class="">
+                        <h1> <strong>{{data}}</strong> </h1>
+                    </div>
+                </header>
+                <div class="container">
+                    <form [formGroup]="addentryform">
+                        <div class="form-group text-center row">
+                            <div class="col-12 col-md-4">
+                                <mat-slide-toggle (click)="toggle()" color="warn">Existing Customer?</mat-slide-toggle>
+                            </div>
+                        </div>
+                        <div *ngIf="ischecked">
+                            <div class="from-group row text-center">
+                                <div class="col-12 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Name</mat-label>
+                                        <mat-select name="Name" formControlName="name">
+                                            <mat-option *ngFor="let item of data1 | async" [value]="item">
+                                                {{ item.CName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Amount</mat-label>
+                                        <input matInput type="number" formControlName="amount" placeholder="Amount">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Date</mat-label>
+                                        <input matInput type="date" formControlName="date" placeholder="date">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="form-group row text-center">
+                                <div class="col-12">
+                                    <button type="submit" (click)="addentryexisting()" mat-raised-button color="warn">Add
+                                   Entry</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!ischecked">
+                            <div class="row text-center">
+                                <div class="col-12 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput type="text" formControlName="name" placeholder="Name">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Amount</mat-label>
+                                        <input matInput type="number" formControlName="amount" placeholder="Amount">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Date</mat-label>
+                                        <input matInput type="date" formControlName="date" placeholder="date">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="form-group row text-center">
+                                <div class="col-12">
+                                    <button type="submit" (click)="addentry()" mat-raised-button color="warn">Add
+                                  Entry</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+            </script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+            </script>
+        </body>
+    </mat-sidenav-content>
+</mat-sidenav-container>
 
 </html>

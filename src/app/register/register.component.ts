@@ -32,6 +32,8 @@ export class RegisterComponent implements OnInit {
       .then((a) => {
         this.router.navigate(['/storename']);
       });
+    }).catch((err) => {
+      alert(err.Message)
     });
   }
 

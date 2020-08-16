@@ -16,6 +16,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DisplaystoreComponent } from './displaystore/displaystore.component';
 import { StorenameComponent } from './storename/storename.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRippleModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { ViewhistoryComponent } from './viewhistory/viewhistory.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { ClearhistoryComponent } from './clearhistory/clearhistory.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +39,8 @@ import { StorenameComponent } from './storename/storename.component';
     RegisterComponent,
     DisplaystoreComponent,
     StorenameComponent,
+    ViewhistoryComponent,
+    ClearhistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +52,19 @@ import { StorenameComponent } from './storename/storename.component';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    MatFormFieldModule,
+    MatRippleModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatListModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   entryComponents: [LoginComponent],
   providers: [],

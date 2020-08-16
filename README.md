@@ -2,8 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
 
-# Initial setup
+## Initial setup
 
+git clone `https://priyadarsan@bitbucket.org/priyadarsan/kanakkubook.git`
+go to the project directory in terminal
 Run `npm install` to setup the project
 
 ## Development server
