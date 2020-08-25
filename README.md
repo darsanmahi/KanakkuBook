@@ -13,8 +13,10 @@ Firebase: 7.11
 
 ## Initial setup
 
-git clone `https://priyadarsan@bitbucket.org/priyadarsan/kanakkubook.git`.
+git clone https://github.com/darsanmahi/KanakkuBook.git.
+
 Go to the project directory in terminal.
+
 Run `npm install` to setup the project
 
 ## Development server
