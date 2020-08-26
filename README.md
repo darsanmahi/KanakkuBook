@@ -13,7 +13,7 @@ Firebase: 7.11
 
 ## Initial setup
 
-git clone https://github.com/darsanmahi/KanakkuBook.git.
+git clone https://github.com/priyadarsanmahendiran/KanakkuBook.git.
 
 Go to the project directory in terminal.
 
