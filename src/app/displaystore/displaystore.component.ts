@@ -18,6 +18,7 @@ export class DisplaystoreComponent implements OnInit {
   itemsRef: AngularFireList<any>;
   itemsRef1: AngularFireList<any>;
   data1: Observable<any> = null;
+  data3: Observable<any> = null;
   data2: Array<string> = [];
   ischecked: boolean = false;
   data: string = '';
@@ -48,9 +49,14 @@ export class DisplaystoreComponent implements OnInit {
               changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
             )
           );
-        this.data1.forEach((element) => {
-          console.log(element);
-        });
+        this.itemsRef1 = this.db.list('users/' + user.uid + '/Stock');
+        this.data3 = this.itemsRef1
+          .snapshotChanges()
+          .pipe(
+            map((changes) =>
+              changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
+            )
+          );
       }
     });
 
@@ -58,6 +64,8 @@ export class DisplaystoreComponent implements OnInit {
       name: ['', Validators.required],
       amount: ['', Validators.required],
       date: ['', Validators.required],
+      item: ['', Validators.required],
+      quantity: ['', Validators.required]
     });
   }
 
@@ -74,8 +82,13 @@ export class DisplaystoreComponent implements OnInit {
     const name = this.addentryform.value.name;
     const amt = this.addentryform.value.amount;
     const date = this.addentryform.value.date;
+    const item = this.addentryform.value.item;
+    const quan = this.addentryform.value.quantity;
     let prev_amt = 0;
     let prev_date = '';
+    let PrevAvailStock = 0;
+    let PrevSoldStock = 0;
+    let PrevTotal = 0;
     console.log(amt);
     this.auth.authState.subscribe((user) => {
       if (user) {
@@ -100,8 +113,29 @@ export class DisplaystoreComponent implements OnInit {
                 Date: prev_date + ',' + date,
               })
               .then((a) => {
-                alert('Entry Added Successfully');
-                this.addentryform.reset();
+                this.db.database.ref('users/' + user.uid + '/Stock/' + item)
+                .once('value', (snapshot) => {
+                  let val = snapshot.val();
+                  PrevAvailStock = Number(val.Available);
+                  PrevSoldStock = Number(val.Sold);
+                  PrevTotal = Number(val.Total);
+                })
+                .then(() => {
+                  let CurrentStock = PrevAvailStock - quan;
+                  let CurrentTotal = PrevTotal - quan;
+                  let CurrentSold = PrevSoldStock + quan;
+                  this.db.database.ref('users/' + user.uid + '/Stock/' + item)
+                    .set({
+                      Available: CurrentStock,
+                      Sold: CurrentSold,
+                      Total: CurrentTotal
+                    })
+                    .then(() => {
+                      this.snackbar.open('Stock Updated!', 'Ok', {
+                        duration: 2000
+                      });
+                    });
+                });
               });
           });
       }
@@ -112,10 +146,13 @@ export class DisplaystoreComponent implements OnInit {
     const name = this.addentryform.value.name;
     const amt = this.addentryform.value.amount;
     const date = this.addentryform.value.date;
-    console.log(name.CName);
+    const item = this.addentryform.value.item.key;
+    const quan = this.addentryform.value.quantity;
     let prev_amt = 0;
     let prev_date = '';
-    console.log(amt);
+    let PrevAvailStock = 0;
+    let PrevSoldStock = 0;
+    let PrevTotal = 0;
     this.auth.authState.subscribe((user) => {
       if (user) {
         const userid = user.uid;
@@ -129,21 +166,28 @@ export class DisplaystoreComponent implements OnInit {
             }
           })
           .then((a) => {
-            let new_date = '';
-            if (prev_date) {
-              new_date = prev_date + ',' + date;
-            } else {
-              new_date = date;
-            }
-            this.db.database
-              .ref('users/' + userid + '/History/' + name.CName)
-              .set({
-                Amount: prev_amt + amt,
-                Date: new_date,
+            this.db.database.ref('users/' + user.uid + '/Stock/' + item)
+              .once('value', (snapshot) => {
+                let val = snapshot.val();
+                PrevAvailStock = Number(val.Available);
+                PrevSoldStock = Number(val.Sold);
+                PrevTotal = Number(val.Total);
               })
-              .then((a) => {
-                alert('Entry Added Successfully');
-                this.addentryform.reset();
+              .then(() => {
+                let CurrentStock = PrevAvailStock - quan;
+                let CurrentTotal = PrevTotal - quan;
+                let CurrentSold = CurrentStock + CurrentTotal;
+                this.db.database.ref('users/' + user.uid + '/Stock/' + item)
+                  .set({
+                    Available: CurrentStock,
+                    Sold: CurrentSold,
+                    Total: CurrentTotal
+                  })
+                  .then(() => {
+                    this.snackbar.open('Stock Updated!', 'Ok', {
+                      duration: 2000
+                    });
+                  });
               });
           });
       }

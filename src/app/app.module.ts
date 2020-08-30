@@ -31,6 +31,9 @@ import { ViewhistoryComponent } from './viewhistory/viewhistory.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { ClearhistoryComponent } from './clearhistory/clearhistory.component';
+import { ViewstockComponent } from './viewstock/viewstock.component';
+import { AddstockComponent } from './addstock/addstock.component';
+import { UpdatestockComponent } from './updatestock/updatestock.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import { ClearhistoryComponent } from './clearhistory/clearhistory.component';
     StorenameComponent,
     ViewhistoryComponent,
     ClearhistoryComponent,
+    ViewstockComponent,
+    AddstockComponent,
+    UpdatestockComponent,
   ],
   imports: [
     BrowserModule,

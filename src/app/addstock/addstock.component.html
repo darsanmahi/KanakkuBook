@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add Stock</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+      <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </mat-toolbar>
+      <mat-sidenav-container>
+        <mat-sidenav #sidenav class="example-sidenav" mode="side" closed>
+          <mat-list>
+            <a mat-list-item [routerLink]="['/displaystore']">Add Entry</a>
+            <a mat-list-item [routerLink]="['/storename']">Change Store Name</a>
+            <a mat-list-item [routerLink]="['/viewhistory']">View History</a>
+            <a mat-list-item [routerLink]="['/clearhistory']">Clear Account</a>
+            <a mat-list-item [routerLink]="['/viewstock']">View Stock</a>
+            <a mat-list-item [routerLink]="['/addstock']">Add Stock</a>
+            <a mat-list-item [routerLink]="['/updatestock']">Update Stock</a>
+            <mat-list-item>
+              <button mat-raised-button color="primary" (click)="logout()">Log Out</button>
+            </mat-list-item>
+          </mat-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <body class="mat-app-background">
+                <header color="primary" class="mat-elevation-z24 text-center">
+                  <div *ngIf="data" class="">
+                    <h1> <strong>{{data}}</strong> </h1>
+                  </div>
+                </header>
+                <div class="container text-center">
+                  <form [formGroup]='addstockform'>
+                    <div class="row">
+                      <div class="col-12 offset-md-2 col-md-4">
+                          <mat-form-field appearance="full">
+                            <mat-label>Item Name</mat-label>
+                            <input matInput type="text" formControlName="name" placeholder="Name" />
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field appearance="full">
+                          <mat-label>Quantity (in kg)</mat-label>
+                          <input matInput type="number" formControlName="quantity" placeholder="Quantity" />
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <button mat-raised-button [disabled]="!addstockform.valid" color="warn" (click)="addStock()">Add Stock</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                  crossorigin="anonymous">
+                </script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+                  integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+                  crossorigin="anonymous">
+                </script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+                  integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+                  crossorigin="anonymous">
+                </script>
+            </body>
+        </mat-sidenav-content>
+        </mat-sidenav-container>
+</html>

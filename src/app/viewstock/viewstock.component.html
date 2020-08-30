@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Your Stock</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+      <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </mat-toolbar>
+      <mat-sidenav-container>
+        <mat-sidenav #sidenav class="example-sidenav" mode="side" closed>
+          <mat-list>
+            <a mat-list-item [routerLink]="['/displaystore']">Add Entry</a>
+            <a mat-list-item [routerLink]="['/storename']">Change Store Name</a>
+            <a mat-list-item [routerLink]="['/viewhistory']">View History</a>
+            <a mat-list-item [routerLink]="['/clearhistory']">Clear Account</a>
+            <a mat-list-item [routerLink]="['/viewstock']">View Stock</a>
+            <a mat-list-item [routerLink]="['/addstock']">Add Stock</a>
+             <a mat-list-item [routerLink]="['/updatestock']">Update Stock</a>
+            <mat-list-item>
+                <button mat-raised-button color="primary" (click)="logout()">Log Out</button>
+            </mat-list-item>
+          </mat-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <body class="mat-app-background">
+                 <header color="primary" class="mat-elevation-z24 text-center">
+                   <div *ngIf="data" class="">
+                     <h1> <strong>{{data}}</strong> </h1>
+                   </div>
+                 </header>
+                 <div class="container">
+                    <div class="row justify-content-center" *ngFor="let item of data1 | async" >
+                      <div class="col-md-6">
+                          <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>Item Name: {{item.key}}</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <p>Available Quantity: {{item.Available}} kg</p>
+                                <p>Sold Quantity: {{item.Sold}} kg</p>
+                            </mat-card-content>
+                          </mat-card>
+                      </div>
+                    </div>
+                 </div>
+                  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                    crossorigin="anonymous">
+                  </script>
+                  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+                    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+                    crossorigin="anonymous">
+                  </script>
+                  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+                    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+                    crossorigin="anonymous">
+                  </script>
+            </body>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+</html>

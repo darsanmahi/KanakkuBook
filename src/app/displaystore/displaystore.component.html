@@ -21,7 +21,12 @@
             <a mat-list-item [routerLink]="['/storename']">Change Store Name</a>
             <a mat-list-item [routerLink]="['/viewhistory']">View History</a>
             <a mat-list-item [routerLink]="['/clearhistory']">Clear Account</a>
-            <button mat-raised-button color="primary" (click)="logout()">Log Out</button>
+            <a mat-list-item [routerLink]="['/viewstock']">View Stock</a>
+            <a mat-list-item [routerLink]="['/addstock']">Add Stock</a>
+            <a mat-list-item [routerLink]="['/updatestock']">Update Stock</a>
+            <mat-list-item>
+              <button mat-raised-button color="primary" (click)="logout()">Log Out</button>
+            </mat-list-item>
         </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -42,7 +47,7 @@
                         </div>
                         <div *ngIf="ischecked">
                             <div class="from-group row text-center">
-                                <div class="col-12 col-md-4">
+                                <div class="col-12 col-md-3">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Name</mat-label>
                                         <mat-select name="Name" formControlName="name">
@@ -52,13 +57,29 @@
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                  <mat-form-field appearance="outline">
+                                    <mat-label>Item Name</mat-label>
+                                    <mat-select name="ItemName" formControlName="item">
+                                      <mat-option *ngFor="let d of data3 | async" [value]="d">
+                                        {{ d.key }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                  <mat-form-field appearance="outline">
+                                    <mat-label>Quantity ( in kg )</mat-label>
+                                    <input matInput type="number" formControlName="quantity" placeholder="Quantity">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Amount</mat-label>
                                         <input matInput type="number" formControlName="amount" placeholder="Amount">
                                     </mat-form-field>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Date</mat-label>
                                         <input matInput type="date" formControlName="date" placeholder="date">
@@ -67,26 +88,42 @@
                             </div>
                             <div class="form-group row text-center">
                                 <div class="col-12">
-                                    <button type="submit" (click)="addentryexisting()" mat-raised-button color="warn">Add
+                                    <button type="submit" [disabled]="!addentryform.valid" (click)="addentryexisting()" mat-raised-button color="warn">Add
                                    Entry</button>
                                 </div>
                             </div>
                         </div>
                         <div *ngIf="!ischecked">
                             <div class="row text-center">
-                                <div class="col-12 col-md-4">
+                                <div class="col-12 col-md-3">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Name</mat-label>
                                         <input matInput type="text" formControlName="name" placeholder="Name">
                                     </mat-form-field>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Amount</mat-label>
                                         <input matInput type="number" formControlName="amount" placeholder="Amount">
                                     </mat-form-field>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                  <mat-form-field appearance="outline">
+                                    <mat-label>Item Name</mat-label>
+                                    <mat-select name="ItemName" formControlName="item">
+                                      <mat-option *ngFor="let d of data3 | async" [value]="d">
+                                        {{ d.key }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                  <mat-form-field appearance="outline">
+                                    <mat-label>Quantity ( in kg )</mat-label>
+                                    <input matInput type="number" formControlName="quantity" placeholder="Quantity">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Date</mat-label>
                                         <input matInput type="date" formControlName="date" placeholder="date">
@@ -95,7 +132,7 @@
                             </div>
                             <div class="form-group row text-center">
                                 <div class="col-12">
-                                    <button type="submit" (click)="addentry()" mat-raised-button color="warn">Add
+                                    <button type="submit" [disabled]="!addentryform.valid" (click)="addentry()" mat-raised-button color="warn">Add
                                   Entry</button>
                                 </div>
                             </div>

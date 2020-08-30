@@ -22,7 +22,12 @@
             <a mat-list-item [routerLink]="['/storename']">Change Store Name</a>
             <a mat-list-item [routerLink]="['/viewhistory']">View History</a>
             <a mat-list-item [routerLink]="['/clearhistory']">Clear Account</a>
-            <button mat-raised-button color="primary" (click)="logout()">Log Out</button>
+            <a mat-list-item [routerLink]="['/viewstock']">View Stock</a>
+            <a mat-list-item [routerLink]="['/addstock']">Add Stock</a>
+             <a mat-list-item [routerLink]="['/updatestock']">Update Stock</a>
+            <mat-list-item>
+              <button mat-raised-button color="primary" (click)="logout()">Log Out</button>
+            </mat-list-item>
         </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>
